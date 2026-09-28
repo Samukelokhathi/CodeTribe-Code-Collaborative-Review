@@ -1,0 +1,28 @@
+{
+  "name": "codetribe-code-collaborative-review",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Samukelokhathi/CodeTribe-Code-Collaborative-Review.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Samukelokhathi/CodeTribe-Code-Collaborative-Review/issues"
+  },
+  "homepage": "https://github.com/Samukelokhathi/CodeTribe-Code-Collaborative-Review#readme",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^26.6.3",
+    "nodemon": "^3.1.14",
+    "typescript": "^7.0.2"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15"
+  }
+}
