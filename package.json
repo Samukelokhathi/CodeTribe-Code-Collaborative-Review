@@ -2,11 +2,10 @@
   "name": "codetribe-code-collaborative-review",
   "version": "1.0.0",
   "main": "index.js",
-    "scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --exec npx tsx src/server.ts"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Samukelokhathi/CodeTribe-Code-Collaborative-Review.git"
@@ -20,11 +19,14 @@
   "homepage": "https://github.com/Samukelokhathi/CodeTribe-Code-Collaborative-Review#readme",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^18.0.4",
     "express": "^5.2.1",
     "pg": "^8.23.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^5.0.6",
     "@types/node": "^26.6.3",
     "@types/pg": "^8.23.1",
