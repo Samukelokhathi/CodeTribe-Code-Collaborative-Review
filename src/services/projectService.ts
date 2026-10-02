@@ -21,3 +21,16 @@ export const findAllProjects = async () => {
   );
   return rows;
 };
+
+
+export const findProjectById = async (id: number) => {
+  const {rows} = await query("SELECT * FROM project WHERE id = $1", [id]);
+  return rows[0] || null
+};
+
+
+export const addMember = async () => {
+  const {rows } = await query (
+    "SELECT *  FROM project "
+  )
+}
