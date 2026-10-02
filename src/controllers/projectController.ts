@@ -70,6 +70,6 @@ export const asssignMember = async (req: Request, res: Response) => {
       
   } catch (error) {
      console.error("Assign member error:", error);
-    return res.status(500).json({ message: "Failed to assign user to project", erro });
+    return res.status(500).json({ message: "Failed to assign user to project", error });
   }
 };

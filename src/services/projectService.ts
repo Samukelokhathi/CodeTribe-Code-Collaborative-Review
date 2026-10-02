@@ -39,3 +39,13 @@ export const addMember = async (projectId: number, userId: number) => {
   );
   return rows[0] || null; 
 };
+
+export const removeMember = async (projectId: number, userId: number) => {
+  const { rows } = await query(
+    `DELETE FROM project_members
+     WHERE project_id = $1 AND user_id = $2
+     RETURNING *`,
+    [projectId, userId],
+  );
+  return rows[0] || null; // null means they weren't a member
+};
