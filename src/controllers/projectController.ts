@@ -67,9 +67,44 @@ export const asssignMember = async (req: Request, res: Response) => {
     return res
       .status(201)
       .json({ message: "User assigned to project successfully", member });
-      
   } catch (error) {
-     console.error("Assign member error:", error);
-    return res.status(500).json({ message: "Failed to assign user to project", error });
+    console.error("Assign member error:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to assign user to project", error });
+  }
+};
+
+export const removeMember = async (req: Request, res: Response) => {
+  const projectId = Number(req.params.id);
+  const userId = Number(req.params.userId);
+
+  try {
+    const project = await ProjectService.findProjectById(projectId);
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    if (project.created_by !== req.user!.id) {
+      return res
+        .status(403)
+        .json({ message: "Only the project owner can remove members" });
+    }
+
+    const removed = await ProjectService.removeMember(projectId, userId);
+    if (!removed) {
+      return res
+        .status(404)
+        .json({ message: "User is not a member of this project" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "User removed from project successfully" });
+  } catch (error) {
+    console.error("Remove member error:", error);
+    return res
+      .status(500)
+      .json({ message: "Failed to remove user from project" });
   }
 };
