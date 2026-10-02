@@ -57,16 +57,19 @@ export const asssignMember = async (req: Request, res: Response) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const number = await ProjectService.addMember(projectId, Number(userId));
+    const member = await ProjectService.addMember(projectId, Number(userId));
     if (!member) {
       return res
         .status(409)
         .json({ message: "User is already a member of this project" });
     }
 
-    return res .status(201) .json({message:"Only the project owner can add members"})
-
+    return res
+      .status(201)
+      .json({ message: "User assigned to project successfully", member });
+      
   } catch (error) {
-    return error;
+     console.error("Assign member error:", error);
+    return res.status(500).json({ message: "Failed to assign user to project", erro });
   }
 };

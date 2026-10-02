@@ -29,8 +29,13 @@ export const findProjectById = async (id: number) => {
 };
 
 
-export const addMember = async () => {
-  const {rows } = await query (
-    "SELECT *  FROM project "
-  )
-}
+export const addMember = async (projectId: number, userId: number) => {
+  const { rows } = await query(
+    `INSERT INTO project_members (project_id, user_id)
+     VALUES ($1, $2)
+     ON CONFLICT DO NOTHING
+     RETURNING *`,
+    [projectId, userId],
+  );
+  return rows[0] || null; 
+};
