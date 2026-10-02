@@ -14,7 +14,6 @@ export const createProject = async (
   return rows[0];
 };
 
-
 export const findAllProjects = async () => {
   const { rows } = await query(
     "SELECT * FROM projects ORDER BY created_at DESC",
@@ -22,15 +21,28 @@ export const findAllProjects = async () => {
   return rows;
 };
 
-
 export const findProjectById = async (id: number) => {
-  const {rows} = await query("SELECT * FROM project WHERE id = $1", [id]);
-  return rows[0] || null
+  const { rows } = await query("SELECT * FROM project WHERE id = $1", [id]);
+  return rows[0] || null;
 };
 
+export const addMember = async (projectId: number, userId: number) => {
+  const { rows } = await query(
+    `INSERT INTO project_members (project_id, user_id)
+     VALUES ($1, $2)
+     ON CONFLICT DO NOTHING
+     RETURNING *`,
+    [projectId, userId],
+  );
+  return rows[0] || null;
+};
 
-export const addMember = async () => {
-  const {rows } = await query (
-    "SELECT *  FROM project "
-  )
-}
+export const removeMember = async (projectId: number, userId: number) => {
+  const { rows } = await query(
+    `DELETE FROM project_members
+     WHERE project_id = $1 AND user_id = $2
+     RETURNING *`,
+    [projectId, userId],
+  );
+  return rows[0] || null;
+};
