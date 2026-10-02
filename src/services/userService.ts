@@ -28,3 +28,30 @@ export const createUser = async (
 
   return rows[0];
 };
+
+export const findUserById = async (id: number) => {
+  const { rows } = await query(
+    "SELECT id, name, email, role FROM users WHERE id = $1",
+    [id],
+  );
+  return rows[0] || null;
+};
+
+export const updateUser = async (id: number, name?: string, email?: string) => {
+  const { rows } = await query(
+    `UPDATE users
+     SET name = COALESCE($1, name),
+         email = COALESCE($2, email)
+     WHERE id = $3
+     RETURNING id, name, email, role`,
+    [name, email, id],
+  );
+  return rows[0] || null;
+};
+
+export const deleteUser = async (id: number) => {
+  const { rows } = await query("DELETE FROM users WHERE id = $1 RETURNING id", [
+    id,
+  ]);
+  return rows[0] || null;
+};
