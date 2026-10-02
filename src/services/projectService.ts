@@ -14,3 +14,10 @@ export const createProject = async (
   return rows[0];
 };
 
+
+export const findAllProjects = async () => {
+  const { rows } = await query(
+    "SELECT * FROM projects ORDER BY created_at DESC",
+  );
+  return rows;
+};

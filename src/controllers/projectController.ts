@@ -22,3 +22,14 @@ export const addProject = async (req: Request, res: Response) => {
     return res.status(500).json({ message: "Error creating project" });
   }
 };
+
+
+export const getAllProjects = async (req: Request, res: Response) => {
+  try {
+    const projects = await ProjectService.findAllProjects();
+    return res.status(200).json(projects);
+  } catch (error) {
+    console.error("List projects error:", error);
+    return res.status(500).json({ message: "Error retrieving projects" });
+  }
+};
