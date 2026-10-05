@@ -32,7 +32,7 @@ export const getAllProjects = async (req: Request, res: Response) => {
   }
 };
 
-export const asssignMember = async (req: Request, res: Response) => {
+export const assignMember = async (req: Request, res: Response) => {
   const projectId = Number(req.params.id);
   const { userId } = req.body;
 

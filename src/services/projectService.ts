@@ -16,7 +16,7 @@ export const createProject = async (
 
 export const findAllProjects = async () => {
   const { rows } = await query(
-    "SELECT * FROM projects ORDER BY created_at DESC",
+    "SELECT * FROM projects WHERE id = $1",
   );
   return rows;
 };

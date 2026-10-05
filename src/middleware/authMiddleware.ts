@@ -9,7 +9,7 @@ export const protect = async (
 ) => {
   const header = req.headers.authorization;
 
-  if (!header || !header.startsWith("Token ")) {
+  if (!header || !header.startsWith("Bearer ")) {
     return res.status(401).json({ message: "Not authorized, no token" });
   }
 
@@ -33,11 +33,3 @@ export const protect = async (
   }
 };
 
-// export const authorize = (...roles: string[]) => {
-//   return (req: Request, res: Response, next: NextFunction) => {
-//     if (!req.user || !roles.includes(req.user.role)) {
-//       return res.status(403).json({ message: "Access denied for your role" });
-//     }
-//     next();
-//   };
-// };
