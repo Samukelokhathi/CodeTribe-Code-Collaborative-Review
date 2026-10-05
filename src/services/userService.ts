@@ -37,6 +37,13 @@ export const findUserById = async (id: number) => {
   return rows[0] || null;
 };
 
+export const findAllUsers = async (): Promise<User[]> => {
+  const { rows } = await query(
+    "SELECT id, email, role, name FROM users ORDER BY id DESC",
+  );
+  return rows;
+};
+
 export const updateUser = async (id: number, name?: string, email?: string) => {
   const { rows } = await query(
     `UPDATE users

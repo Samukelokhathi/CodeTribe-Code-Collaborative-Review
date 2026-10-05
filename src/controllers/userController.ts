@@ -14,6 +14,16 @@ export const getUser = async (req: Request, res: Response) => {
   }
 };
 
+export const getAllUsers = async (req: Request, res: Response) => {
+    try{
+        const users = await UserService.findAllUsers();
+        return res.status(200).json(users);
+    }catch(error){
+        console.error("Login Error:", error);
+        return res.status(500).json({message: "Error retrieving users"});
+    }
+};
+
 export const updateUser = async (req: Request, res: Response) => {
   const id = Number(req.params.id);
 
