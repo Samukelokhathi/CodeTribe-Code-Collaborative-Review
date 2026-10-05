@@ -14,7 +14,6 @@ export const createProject = async (
   return rows[0];
 };
 
-
 export const findAllProjects = async () => {
   const { rows } = await query(
     "SELECT * FROM projects ORDER BY created_at DESC",
@@ -22,12 +21,10 @@ export const findAllProjects = async () => {
   return rows;
 };
 
-
 export const findProjectById = async (id: number) => {
-  const {rows} = await query("SELECT * FROM project WHERE id = $1", [id]);
-  return rows[0] || null
+  const { rows } = await query("SELECT * FROM project WHERE id = $1", [id]);
+  return rows[0] || null;
 };
-
 
 export const addMember = async (projectId: number, userId: number) => {
   const { rows } = await query(
@@ -37,8 +34,9 @@ export const addMember = async (projectId: number, userId: number) => {
      RETURNING *`,
     [projectId, userId],
   );
-  return rows[0] || null; 
+  return rows[0] || null;
 };
+
 
 export const removeMember = async (projectId: number, userId: number) => {
   const { rows } = await query(
@@ -49,3 +47,4 @@ export const removeMember = async (projectId: number, userId: number) => {
   );
   return rows[0] || null; // null means they weren't a member
 };
+  
