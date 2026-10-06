@@ -5,8 +5,8 @@ import * as UserService from "../services/userService";
 export const addProject = async (req: Request, res: Response) => {
   const { name, description } = req.body;
 
-  if (!name) {
-    return res.status(400).json({ message: "Project name is required" });
+  if (!name || !description) {
+    return res.status(400).json({ message: "Project name and description are required" });
   }
 
   try {

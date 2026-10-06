@@ -1,12 +1,13 @@
 import { query } from "../config/database";
+import { projects } from "../models/projects.types";
 
 export const createProject = async (
   name: string,
   description: string | null,
   userId: number,
-) => {
+): Promise<projects> => {
   const { rows } = await query(
-    `INSERT INTO projects (name, description, created_by)
+    `INSERT INTO projects (name, description, owner_id)
      VALUES ($1, $2, $3)
      RETURNING *`,
     [name, description, userId],
@@ -14,9 +15,9 @@ export const createProject = async (
   return rows[0];
 };
 
-export const findAllProjects = async () => {
+export const findAllProjects = async (): Promise<projects[]> => {
   const { rows } = await query(
-    "SELECT * FROM projects WHERE id = $1",
+    "SELECT * FROM projects ORDER BY id DESC",
   );
   return rows;
 };
